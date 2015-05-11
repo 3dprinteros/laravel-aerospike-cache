@@ -6,7 +6,7 @@ use Illuminate\Cache\Repository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 
-class MemcacheServiceProvider extends ServiceProvider
+class AerospikeCacheServiceProvider extends ServiceProvider
 {
     /**
      * Indicates if loading of the provider is deferred.
@@ -70,7 +70,7 @@ class MemcacheServiceProvider extends ServiceProvider
                     'aerospike', function ($app) {
                         return $app['aerospike.store'];
                     }
-            );
+                );
             }
         );
     }

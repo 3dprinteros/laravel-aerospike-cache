@@ -28,7 +28,7 @@ class AerospikeStore implements \Illuminate\Contracts\Cache\Store
     /**
      * Create a new Aerospike store.
      *
-     * @param  \Aerospike  $aerospike
+     * @param  \Aerospike $aerospike
      * @param  string     $prefix
      * @param  string     $namespace
      * @return void
@@ -85,7 +85,7 @@ class AerospikeStore implements \Illuminate\Contracts\Cache\Store
 
     private function getKey($key)
     {
-        return $this->aerospike->initKey($this->namespace ,$this->prefix, $key);
+        return $this->aerospike->initKey($this->namespace, $this->prefix, $key);
     }
 
 }
