@@ -18,7 +18,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Mochaka\\AerospikeCache": "src/Mochaka/AerospikeCache/"
+      "Mochaka\\AerospikeCache\\": "src/Mochaka/AerospikeCache"
     }
   },
   "extra": {
