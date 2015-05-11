@@ -13,7 +13,6 @@
     "php": ">=5.4.0",
     "illuminate/support": "~5.0",
     "illuminate/cache": "~5.0",
-    "contorion/aerospike-stub": "dev-master",
     "aerospike/aerospike-client-php": "*"
   },
   "autoload": {
@@ -21,13 +20,8 @@
       "Mochaka\\AerospikeCache\\": "src/Mochaka/AerospikeCache"
     }
   },
-  "extra": {
-    "branch-alias": {
-      "dev-master": "1.0-dev"
-    }
+  "require-dev": {
+    "contorion/aerospike-stub": "dev-master"
   },
-  "minimum-stability": "dev",
-  "suggest": {
-    "wikimedia/composer-merge-plugin": "Allows the ability to create and merge composer.json files for your individual modules for module-specific dependency management."
-  }
+  "minimum-stability": "dev"
 }
