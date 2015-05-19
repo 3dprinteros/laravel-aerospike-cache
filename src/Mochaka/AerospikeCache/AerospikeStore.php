@@ -33,7 +33,7 @@ class AerospikeStore implements \Illuminate\Contracts\Cache\Store
      * @param  string     $namespace
      * @return void
      */
-    public function __construct(\Aerospike $aerospike, $prefix = '', $namespace = 0)
+    public function __construct(\Aerospike $aerospike, $prefix = '', $namespace = '3dprinteros')
     {
         $this->aerospike = $aerospike;
         $this->namespace = $namespace;
