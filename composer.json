@@ -1,5 +1,5 @@
 {
-  "name": "mochaka/laravel-aerospike-cache",
+  "name": "3dprinteros/laravel-aerospike-cache",
   "description": "Laravel 5 Aerospike Cache",
   "keywords": ["aerospike", "laravel", "cache"],
   "license": "MIT",

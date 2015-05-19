@@ -35,7 +35,7 @@ class AerospikeStore implements \Illuminate\Contracts\Cache\Store
      */
     public function __construct(\Aerospike $aerospike, $prefix = '', $namespace = 0)
     {
-        $this->$aerospike = $aerospike;
+        $this->aerospike = $aerospike;
         $this->namespace = $namespace;
         $this->prefix = strlen($prefix) > 0 ? $prefix.':' : '';
     }
@@ -46,6 +46,7 @@ class AerospikeStore implements \Illuminate\Contracts\Cache\Store
         if ($status == \Aerospike::OK) {
             return $record['bins'];
         }
+        return null;
     }
 
     public function put($key, $value, $minutes)
