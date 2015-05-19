@@ -7,7 +7,7 @@ class AerospikeStore implements \Illuminate\Contracts\Cache\Store
     /**
      * The Aerospike instance.
      *
-     * @var \Memcache
+     * @var \Aerospike
      */
     protected $aerospike;
 
@@ -51,7 +51,7 @@ class AerospikeStore implements \Illuminate\Contracts\Cache\Store
 
     public function put($key, $value, $minutes)
     {
-        $this->aerospike->set($this->getKey($key), $value, $minutes * 60);
+        $this->aerospike->put($this->getKey($key), $value, $minutes * 60);
     }
 
     public function increment($key, $value = 1)
@@ -66,7 +66,7 @@ class AerospikeStore implements \Illuminate\Contracts\Cache\Store
 
     public function forever($key, $value)
     {
-        $this->aerospike->set($this->getKey($key), $value);
+        $this->aerospike->put($this->getKey($key), $value);
     }
 
     public function forget($key)
@@ -76,7 +76,6 @@ class AerospikeStore implements \Illuminate\Contracts\Cache\Store
 
     public function flush()
     {
-        $this->aerospike->flush();
     }
 
     public function getPrefix()
