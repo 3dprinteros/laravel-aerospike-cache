@@ -40,9 +40,9 @@ class AerospikeStore implements \Illuminate\Contracts\Cache\Store
         $this->prefix = $prefix;
     }
 
-    public function get($key)
+    public function get($key, $prefix = null)
     {
-        $status = $this->aerospike->get($this->getKey($key), $record);
+        $status = $this->aerospike->get($this->getKey($key, $prefix), $record);
         if ($status == \Aerospike::OK) {
             return $record['bins'];
         }
