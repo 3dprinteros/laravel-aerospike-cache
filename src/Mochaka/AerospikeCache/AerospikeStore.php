@@ -37,7 +37,7 @@ class AerospikeStore implements \Illuminate\Contracts\Cache\Store
     {
         $this->aerospike = $aerospike;
         $this->namespace = $namespace;
-        $this->prefix = strlen($prefix) > 0 ? $prefix.':' : '';
+        $this->prefix = $prefix;
     }
 
     public function get($key)
@@ -49,29 +49,29 @@ class AerospikeStore implements \Illuminate\Contracts\Cache\Store
         return null;
     }
 
-    public function put($key, $value, $minutes)
+    public function put($key, $value, $minutes, $prefix = null)
     {
-        $this->aerospike->put($this->getKey($key), $value, $minutes * 60);
+        $this->aerospike->put($this->getKey($key, $prefix), $value, $minutes * 60);
     }
 
-    public function increment($key, $value = 1)
+    public function decrement($key, $value = 1, $prefix = null)
     {
-        $this->aerospike->increment($this->getKey($key), '', $value);
+        $this->aerospike->decrement($this->getKey($key, $prefix), $value);
     }
 
-    public function decrement($key, $value = 1)
+    public function increment($key, $value = 1, $prefix = null)
     {
-        $this->aerospike->decrement($this->getKey($key), $value);
+        $this->aerospike->increment($this->getKey($key, $prefix), '', $value);
     }
 
-    public function forever($key, $value)
+    public function forever($key, $value, $prefix = null)
     {
-        $this->aerospike->put($this->getKey($key), $value);
+        $this->aerospike->put($this->getKey($key, $prefix), $value);
     }
 
-    public function forget($key)
+    public function forget($key, $prefix = null)
     {
-        $this->aerospike->remove($this->getKey($key));
+        $this->aerospike->remove($this->getKey($key, $prefix));
     }
 
     public function flush()
@@ -83,9 +83,18 @@ class AerospikeStore implements \Illuminate\Contracts\Cache\Store
         return $this->prefix;
     }
 
-    private function getKey($key)
+    public function setPrefix($prefix)
     {
-        return $this->aerospike->initKey($this->namespace, $this->prefix, $key);
+        $this->prefix = $prefix;
+        return $this;
+    }
+
+    private function getKey($key, $prefix = null)
+    {
+        if (!$prefix) {
+            $prefix = $this->prefix;
+        }
+        return $this->aerospike->initKey($this->namespace, $prefix, $key);
     }
 
 }
